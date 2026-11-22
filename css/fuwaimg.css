@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------
+プログラム名：fuwaimg
+バージョン：2.0.0
+製作者：ガタガタ（https://do.gt-gt.org/）
+公開日：2020.11.20
+修正日：2026.10.11
+
+このプログラムは使用・改変・再配布・販売すべて自由です。
+報告やリンクなども必要ありません。
+ただし、利用にあたりこの注意書きは削除しないでください。
+また、あたかもプログラムを自作したかのように誤解させる言動はお控えください。
+----------------------------------------------------- */
+
+#fuwaimg { position: fixed; inset: 0; z-index: 999999; color: #f4f5f8; font: 14px/1.6 system-ui, sans-serif; isolation: isolate; }
+#fuwaimg *, #fuwaimg *::before, #fuwaimg *::after { box-sizing: border-box; }
+#fuwaimg [hidden], #fuwaimg[hidden] { display: none !important; }
+#fuwaimg_mask { position: absolute; inset: 0; background: rgb(10 13 20 / 82%); backdrop-filter: blur(12px); }
+#fuwaimg_inner { position: absolute; inset: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); margin: auto; max-width: 1440px; max-height: 1000px; display: flex; flex-direction: column; border: 1px solid rgb(255 255 255 / 12%); border-radius: 0; background: #151821; box-shadow: 0 24px 100px #0008; overflow: hidden; animation: fuwaimg_enter .2s ease-out; }
+#fuwaimg_img { position: relative; flex: 1; min-height: 0; overflow: hidden; touch-action: none; user-select: none; background: #0d1017; }
+#fuwaimg_imginner { position: absolute; inset: 0; pointer-events: none; }
+#fuwaimg-showimg { position: absolute; left: 50%; top: 50%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; object-fit: contain; transform-origin: center; }
+#fuwaimg_img.zoom_in { cursor: grab; }
+#fuwaimg_img.zoom_in.dragging { cursor: grabbing; }
+#fuwaimg_loading { position: absolute; inset: 0; display: grid; place-content: center; margin: 0; padding: 24px; text-align: center; color: #c1c8d7; }
+#fuwaimg_caption { display: flex; align-items: center; gap: 16px; padding: 12px 18px; background: #1b1f2a; flex-shrink: 0; }
+#fuwaimg_caption_text { flex: 1; min-width: 0; margin: 0; max-height: 20vh; overflow: auto; overflow-wrap: anywhere; white-space: pre-wrap; }
+#fuwaimg_count { color: #a5aec1; font-size: 12px; white-space: nowrap; }
+#fuwaimg_tools { display: flex; align-items: center; gap: 6px; }
+#fuwaimg button { appearance: none; display: inline-grid; place-items: center; flex-shrink: 0; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 0; background: transparent; color: #f4f5f8; font: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
+#fuwaimg button:focus-visible { outline: 3px solid #a9bfff; outline-offset: -3px; }
+#fuwaimg button:disabled { opacity: .35; cursor: default; }
+#fuwaimg .fuwaimg_icon { display: block; width: 24px; height: 24px; pointer-events: none; }
+#fuwaimg.fuwaimg_rtl #fuwaimg_prev .fuwaimg_icon, #fuwaimg.fuwaimg_rtl #fuwaimg_next .fuwaimg_icon { transform: rotate(180deg); }
+#fuwaimg #fuwaimg_prev, #fuwaimg #fuwaimg_next { position: absolute; top: calc(50% - 50px); width: 48px; height: 56px; font-size: 36px; }
+#fuwaimg #fuwaimg_prev .fuwaimg_icon, #fuwaimg #fuwaimg_next .fuwaimg_icon { filter: drop-shadow(0 1px 3px rgb(0 0 0 / 30%)); }
+#fuwaimg_prev { left: 12px; }
+#fuwaimg_next { right: 12px; }
+#fuwaimg.fuwaimg_rtl #fuwaimg_prev { left: auto; right: 12px; }
+#fuwaimg.fuwaimg_rtl #fuwaimg_next { right: auto; left: 12px; }
+@media (max-width: 600px) {
+  #fuwaimg_inner { inset: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); border-radius: 0; }
+  #fuwaimg_caption { flex-wrap: wrap; gap: 8px; padding: 10px; }
+  #fuwaimg_caption_text { flex-basis: 100%; font-size: 13px; }
+  #fuwaimg_caption_text:empty { display: none; }
+  #fuwaimg_tools { margin-left: auto; }
+  #fuwaimg #fuwaimg_prev, #fuwaimg #fuwaimg_next { width: 44px; height: 48px; }
+}
+@keyframes fuwaimg_enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { #fuwaimg_inner { animation: none; } }
